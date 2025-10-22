@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo do Ramon - RPG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="menu" class="tela">
+    <h1 class="pixel">JOGO DO RAMON</h1>
+    <button class="pixel" onclick="abrirHistoria()">Jogar</button>
+  </div>
+
+  <div id="historia" class="tela" style="display:none;">
+    <div class="pixel historia-texto">
+      <p>
+        Em um mundo com poderes e mágias, chamado Dounia, você terá a missão de ajudar esse mundo de problemas que estão por vir.<br>
+        Você, caro cavaleiro, tem uma missão muito importante. Dounia precisa de sua ajuda!
+      </p>
+      <button class="pixel" onclick="abrirCustomizacao()">Avançar</button>
+    </div>
+  </div>
+
+  <div id="customizacao" class="tela" style="display:none;">
+    <h2 class="pixel">Customização do Personagem</h2>
+    <label class="pixel">Nome: <input type="text" id="nomePersonagem"></label><br>
+    <label class="pixel">Boneco:
+      <select id="boneco">
+        <option>Boneco 1</option>
+        <option>Boneco 2</option>
+        <option>Boneco 3</option>
+        <option>Boneco 4</option>
+      </select>
+    </label><br>
+    <label class="pixel">Raça:
+      <select id="raca">
+        <option>Humano</option>
+        <option>Demonio</option>
+        <option>Hibrido</option>
+        <option>Elfo</option>
+        <option>Anjo</option>
+        <option>Oni</option>
+      </select>
+    </label><br>
+    <label class="pixel">Classe:
+      <select id="classe">
+        <option>Paladino</option>
+        <option>Grappler</option>
+        <option>Cavaleiro</option>
+        <option>Mago</option>
+      </select>
+    </label><br>
+    <!-- Adicione mais customizações conforme desejar -->
+    <button class="pixel" onclick="iniciarJogo()">Começar Aventura</button>
+  </div>
+  <!-- ... Customização ... -->
+<div id="mapa" class="tela" style="display:none;">
+    <h2 class="pixel">Vilarejo de Lúmen</h2>
+    <div id="gameArea">
+      <canvas id="mapCanvas" width="320" height="240"></canvas>
+    </div>
+    <button class="pixel" onclick="voltarMenu()">Voltar ao Menu</button>
+  </div>
+
+  <!-- Aqui você pode adicionar a próxima tela do jogo -->
+  <script src="script.js"></script>
+</body>
+</html>
