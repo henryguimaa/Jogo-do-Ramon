@@ -9,13 +9,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            MapaSeeder::class,
-            NpcSeeder::class,
-            ItemSeeder::class,
-            JogadorSeeder::class,
-            QuestSeeder::class,
-            InimigoSeeder::class,
-            BatalhaSeeder::class,
+            PassiveSeeder::class,
         ]);
     }
 }
