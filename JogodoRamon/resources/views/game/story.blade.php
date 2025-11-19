@@ -1,8 +1,40 @@
 @extends('layouts.app')
 
+@section('body-class', 'story-bg')
+
+@php
+    $hideMenu = true;
+    $title = "Dounia";
+@endphp
+
 @section('content')
-	<h2>História — Nazaroth</h2>
-	<p>Em Dounia, magia e mana definem destinos. Você é o cavaleiro que ajudará a impedir que Nazaroth, o Eterno Profanado, escape do selo.</p>
-	<p>Explore vilarejos, encare bosses, encontre a Chama Proibida e junte-se a Eryss, Eldric e Zyvarra.</p>
-	<p>Volte para a seleção para iniciar o jogo.</p>
+
+<div class="cinematica-container">
+
+    <div class="cinematica-overlay"></div>
+
+    <div class="cinematica-text-box" id="cinematicaBox">
+
+        <p class="cena" data-line="{{ $character->name }} desperta em uma pequena vila cercada por florestas densas."></p>
+
+        <p class="cena" data-line="Rumores dizem que forças antigas despertaram… e algo maligno se aproxima."></p>
+
+        <p class="cena" data-line="Sombras ganham forma, criaturas se erguem na calada da noite."></p>
+
+        <p class="cena" data-line="O reino inteiro clama por um herói… e tudo aponta para você, {{ $character->name }}."></p>
+
+        <p class="cena" data-line="Raça: {{ $character->race }} — Classe: {{ $character->char_class }} — Elemento: {{ $character->element }}"></p>
+
+        <p class="cena" data-line="Sua jornada em Dounia está prestes a começar."></p>
+
+    </div>
+
+    <a id="nextBtn" class="proximo-btn hidden" href="{{ route('game.map', $character->id) }}">
+        Ir para o Mapa →
+    </a>
+
+</div>
+
+<script src="{{ asset('js/cinematica.js') }}"></script>
+
 @endsection

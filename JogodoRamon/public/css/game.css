@@ -119,3 +119,118 @@ input[type="text"], select {
 
 /* keep sharp edges on scaled layouts */
 *{ image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor; }
+
+.story-bg {
+    background: url('https://i.pinimg.com/736x/98/37/47/983747b35818f37aa66552aa83867493.jpg')
+        no-repeat center center fixed;
+    background-size: cover;
+}
+/* ---- Background ---- */
+.story-bg {
+    background: url('https://i.pinimg.com/736x/98/37/47/983747b35818f37aa66552aa83867493.jpg')
+    no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* ---- Caixa da história ---- */
+.cinematic-box {
+    max-width: 800px;
+    margin: 60px auto;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 25px;
+    border: 2px solid #000;
+    border-radius: 12px;
+    color: #fff;
+    font-family: 'Press Start 2P', sans-serif;
+    box-shadow: 0 0 20px #000;
+}
+
+/* ---- Texto animado ---- */
+.lore-animated {
+    white-space: pre-line;
+    line-height: 22px;
+    font-size: 14px;
+    min-height: 200px;
+    margin-bottom: 20px;
+}
+
+/* ---- Botão de avançar ---- */
+.next-button {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #1b4bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.next-button:hover {
+    background: #507bff;
+}
+
+.story-bg {
+    background: url("https://i.pinimg.com/736x/98/37/47/983747b35818f37aa66552aa83867493.jpg") no-repeat center center fixed;
+    background-size: cover;
+    animation: zoomBG 20s ease-in-out forwards;
+}
+
+@keyframes zoomBG {
+    0% { background-size: 105%; }
+    100% { background-size: 120%; }
+}
+
+.cinematica-overlay {
+    position: fixed;
+    inset: 0;
+    background: black;
+    opacity: 1;
+    animation: fadeOut 3s forwards;
+    z-index: 900;
+}
+
+@keyframes fadeOut { 100% { opacity: 0; } }
+
+.cinematica-container {
+    position: relative;
+    margin-top: 80px;
+}
+
+.cinematica-text-box {
+    width: 70%;
+    margin: auto;
+    padding: 25px;
+    background: rgba(0,0,0,0.6);
+    border: none !important;  
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    min-height: 150px;
+}
+
+.cena {
+    font-size: 18px;
+    margin: 20px 0;
+    color: white;
+    opacity: 0;
+}
+
+.proximo-btn {
+    display: block;
+    width: fit-content;
+    margin: 40px auto 0;
+    padding: 12px 22px;
+    background: #00eaff;
+    color: #000;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.proximo-btn:hover {
+    transform: scale(1.08);
+}
+
+.hidden {
+    display: none;
+}

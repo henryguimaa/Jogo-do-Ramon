@@ -4,7 +4,7 @@
 @section('body-class', 'home')
 
 @section('content')
-	<h1>Jogo do Ramon</h1>
+	<h1>Dounia</h1>
 	<p>Escolha uma fase para iniciar:</p>
 	<div class="buttons">
 		<a class="btn" href="{{ route('phase.show', ['number' => 1]) }}">Fase 1</a>

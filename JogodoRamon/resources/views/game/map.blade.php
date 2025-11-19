@@ -1,26 +1,31 @@
-<!doctype html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Mapa - JOGO DO RAMON</title>
-	<link rel="stylesheet" href="/css/game.css">
-</head>
-<body>
-	<header class="game-header">
-		<h1>Mapa - Vilarejo de Lúmen</h1>
-		<nav><a href="{{ route('home') }}" class="btn">Voltar</a></nav>
-	</header>
+@extends('layouts.app')
 
-	<main class="container">
-		<div class="map">
-			<!-- mapa estático por enquanto -->
-			<div class="map-tile">Vilarejo</div>
-			<div class="map-tile">Floresta de Zarviel</div>
-			<div class="map-tile">Cume Gravemir</div>
-			<div class="map-tile">Montanha de Draemora</div>
-			<div class="map-tile">Reino de Volkaris (santuário)</div>
-		</div>
-		<p class="hint">Clique em uma área para explorar (funcionalidade futura).</p>
-	</main>
-</body>
-</html>
+@section('content')
+    <h2>Mapa do Mundo — {{ $character->name }}</h2>
+
+    <p>Selecione uma área para explorar.</p>
+
+    <ul>
+        <li>
+            <strong>Floresta Nebulosa</strong> — perigo baixo  
+            <br>
+            <button>Entrar</button>
+        </li>
+
+        <li>
+            <strong>Caverna Ecoante</strong> — perigo médio  
+            <br>
+            <button>Entrar</button>
+        </li>
+
+        <li>
+            <strong>Ruínas Antigas</strong> — perigo alto  
+            <br>
+            <button>Entrar</button>
+        </li>
+    </ul>
+
+    <br>
+
+    <a href="{{ route('characters.show', $character->id) }}">Voltar para a Ficha</a>
+@endsection

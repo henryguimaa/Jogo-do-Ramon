@@ -15,16 +15,10 @@ class Character extends Model
         'race',
         'char_class',
         'subclass',
-        'passive_id',
         'hp',
         'atk',
         'def',
         'spd',
         'element',
     ];
-
-    public function passive()
-    {
-        return $this->belongsTo(Passive::class, 'passive_id');
-    }
 }

@@ -1,14 +1,14 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Character;
-use App\Models\Passive;
 use Illuminate\Database\QueryException;
 
 class CharacterController extends Controller
 {
-    // Display a listing of the characters
+    // Lista de personagens
     public function index()
     {
         try {
@@ -21,10 +21,9 @@ class CharacterController extends Controller
         return view('characters.index', compact('characters','dbError'));
     }
 
-    // Show the form for creating a new character
+    // Formulário de criação
     public function create()
     {
-        // opções baseadas no texto que você forneceu
         $races = ['Humano','Demônio','Híbrido','Elfo','Anjo','Oni'];
         $classes = ['Paladino','Grappler','Cavaleiro','Mago'];
         $subclasses = [
@@ -38,7 +37,7 @@ class CharacterController extends Controller
         return view('characters.create', compact('races','classes','subclasses','elements'));
     }
 
-    // Store a newly created character in storage
+    // Salvar novo personagem
     public function store(Request $request)
     {
         $request->validate([
@@ -46,17 +45,14 @@ class CharacterController extends Controller
             'race' => 'required|string|max:100',
             'char_class' => 'required|string|max:100',
             'subclass' => 'nullable|string|max:100',
-            'passive' => 'nullable|string|max:255',
         ]);
 
         try {
-            Character::create([
+            $character = Character::create([
                 'name' => $request->input('name'),
                 'race' => $request->input('race'),
                 'char_class' => $request->input('char_class'),
                 'subclass' => $request->input('subclass'),
-                'passive' => $request->input('passive'),
-                // valores padrão mínimos
                 'hp' => 100,
                 'atk' => 10,
                 'def' => 5,
@@ -64,32 +60,33 @@ class CharacterController extends Controller
                 'element' => $request->input('element', 'neutral'),
             ]);
         } catch (QueryException $e) {
-            // SQLSTATE 42S02 = Base table or view not found
             $code = $e->getCode();
             if (strpos($code, '42S02') !== false || $code === '42S02') {
-                $msg = "Tabela 'characters' não encontrada. Rode no terminal do projeto: php artisan migrate";
+                $msg = "Tabela 'characters' não encontrada. Rode: php artisan migrate";
             } else {
                 $msg = "Erro ao salvar personagem: " . $e->getMessage();
             }
             return redirect()->back()->withInput()->with('error', $msg);
         }
 
-        return redirect()->route('characters.index')->with('success', 'Personagem criado com sucesso!');
+        // 🔥 Depois de criar → vai direto para a ficha
+        return redirect()
+            ->route('characters.show', $character->id)
+            ->with('success', 'Personagem criado com sucesso!');
     }
 
-    // Display the specified character
+    // Mostrar ficha do personagem
     public function show($id)
     {
-        $character = Character::with('passive')->findOrFail($id);
-        return view('characters.show', compact('character')); // view show pode ser criada depois
+        $character = Character::findOrFail($id);
+        return view('characters.show', compact('character'));
     }
 
-    // Show the form for editing the specified character
+    // Formulário de edição
     public function edit($id)
     {
         $character = Character::findOrFail($id);
 
-        // mesmas opções para o formulário de edição
         $races = ['Humano','Demônio','Híbrido','Elfo','Anjo','Oni'];
         $classes = ['Paladino','Grappler','Cavaleiro','Mago'];
         $subclasses = [
@@ -103,7 +100,7 @@ class CharacterController extends Controller
         return view('characters.edit', compact('character','races','classes','subclasses','elements'));
     }
 
-    // Update the specified character in storage
+    // Atualizar personagem
     public function update(Request $request, $id)
     {
         $character = Character::findOrFail($id);
@@ -113,38 +110,33 @@ class CharacterController extends Controller
             'race' => 'required|string|max:100',
             'char_class' => 'required|string|max:100',
             'subclass' => 'nullable|string|max:100',
-            'passive' => 'nullable|string|max:255',
         ]);
 
-        $character->update($request->only(['name','race','char_class','subclass','passive','element']));
+        $character->update($request->only([
+            'name','race','char_class','subclass','element'
+        ]));
 
-        return redirect()->route('characters.index')->with('success', 'Personagem atualizado.');
+        return redirect()
+            ->route('characters.index')
+            ->with('success', 'Personagem atualizado.');
     }
 
-    // Remove the specified character from storage
+    // Excluir personagem
     public function destroy($id)
     {
         $character = Character::findOrFail($id);
         $character->delete();
-        return redirect()->route('characters.index')->with('success', 'Personagem excluído.');
+
+        return redirect()
+            ->route('characters.index')
+            ->with('success', 'Personagem excluído.');
     }
 
-    // Assign a passive to a character (by passive id)
-    public function assignPassive(Request $request, $id)
-    {
-        $character = Character::findOrFail($id);
-        $request->validate(['passive_id' => 'nullable|exists:passives,id']);
-        $character->passive_id = $request->input('passive_id');
-        $character->save();
-        return redirect()->route('characters.show', $character->id)->with('success', 'Passiva atribuída.');
-    }
-
-    // Simple battle stub between character and a boss (returns basic json)
+    // Função simples de batalha (demo)
     public function battle(Request $request, $id)
     {
-        $character = Character::with('passive')->findOrFail($id);
+        $character = Character::findOrFail($id);
 
-        // boss básico (final boss stub)
         $boss = [
             'name' => 'Nazaroth (Corrompido)',
             'hp' => 1000,
@@ -153,7 +145,6 @@ class CharacterController extends Controller
             'element' => 'dark',
         ];
 
-        // Simples cálculo de dano de um turno para fins de demo
         $charDamage = max(0, $character->atk - $boss['def']);
         $bossDamage = max(0, $boss['atk'] - $character->def);
 
