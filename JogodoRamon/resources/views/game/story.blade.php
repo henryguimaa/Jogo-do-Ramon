@@ -29,9 +29,10 @@
 
     </div>
 
-    <a id="nextBtn" class="proximo-btn hidden" href="{{ route('game.map', $character->id) }}">
+    <a href="{{ route('game.map', $character->id) }}" class="map-button">
         Ir para o Mapa →
     </a>
+    
 
 </div>
 

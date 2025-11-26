@@ -19,7 +19,6 @@ return new class extends Migration {
 			$table->integer('spd')->default(5);
 			$table->string('element')->default('neutral');
 			$table->timestamps();
-
 			$table->foreign('passive_id')->references('id')->on('passives')->onDelete('set null');
 		});
 	}

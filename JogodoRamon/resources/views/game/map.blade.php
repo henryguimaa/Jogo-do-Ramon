@@ -9,23 +9,30 @@
         <li>
             <strong>Floresta Nebulosa</strong> — perigo baixo  
             <br>
-            <button>Entrar</button>
+            <a href="{{ route('game.area', ['id' => $character->id, 'area' => 'floresta']) }}" class="btn">
+                Entrar
+            </a>
         </li>
 
         <li>
             <strong>Caverna Ecoante</strong> — perigo médio  
             <br>
-            <button>Entrar</button>
+            <a href="{{ route('game.area', ['id' => $character->id, 'area' => 'caverna']) }}" class="btn">
+                Entrar
+            </a>
         </li>
 
         <li>
             <strong>Ruínas Antigas</strong> — perigo alto  
             <br>
-            <button>Entrar</button>
+            <a href="{{ route('game.area', ['id' => $character->id, 'area' => 'ruinas']) }}" class="btn">
+                Entrar
+            </a>
         </li>
     </ul>
 
     <br>
 
-    <a href="{{ route('characters.show', $character->id) }}">Voltar para a Ficha</a>
+    {{-- Voltar para a história --}}
+    <a href="{{ route('game.story', $character->id) }}">Voltar</a>
 @endsection

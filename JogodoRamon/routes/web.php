@@ -29,6 +29,10 @@ Route::get('/game/customize', [GameController::class, 'customize'])->name('game.
 
 Route::get('/game/story/{id}', [GameController::class, 'story'])->name('game.story');
 Route::get('/game/map/{id}', [GameController::class, 'map'])->name('game.map');
+Route::get('/game/map/{id}/{area}', [GameController::class, 'enterArea'])->name('game.area');
+Route::get('/game/{id}/area/{area}', [GameController::class, 'enterArea'])->name('game.area');
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +53,7 @@ Route::post('characters/{id}/battle', [CharacterController::class, 'battle'])
 
 Route::get('/setup/migrate', [GameController::class, 'runMigrations'])
     ->name('setup.migrate');
+
+
+
+    
